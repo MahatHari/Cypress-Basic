@@ -21,6 +21,7 @@ describe('Visit Cypress ', () => {
 });
 describe('Test search functionality', () => {
   it.only(' should take input and search for that input in modal and close modal', () => {
+    //
     cy.get('.DocSearch', { timeout: 10000 }).click().should('not.be.focused');
     cy.get('#docsearch-input')
       .should('be.visible')
