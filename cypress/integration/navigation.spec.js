@@ -1,10 +1,11 @@
 /// <reference types="cypress"/>
+beforeEach(() => {
+  cy.viewport(1440, 900);
+  cy.visit('https://docs.cypress.io');
+});
 
 describe('Visit Cypress ', () => {
-  it('should navigate to get command and  assert border', () => {
-    cy.viewport(1440, 900);
-    cy.visit('https://docs.cypress.io');
-
+  it.only('should navigate to get command and  assert border', () => {
     cy.get('nav').within(() => {
       cy.contains('API').click();
     });
@@ -19,13 +20,8 @@ describe('Visit Cypress ', () => {
   });
 });
 describe('Test search functionality', () => {
-  it.only(' should take input and search for that input', () => {
-    cy.viewport(1400, 900);
-    cy.visit('https://docs.cypress.io');
-    cy.get('nav')
-      .get('.DocSearch', { timeout: 20000 })
-      .click()
-      .should('not.be.focused');
+  it.only(' should take input and search for that input in modal and close modal', () => {
+    cy.get('.DocSearch', { timeout: 10000 }).click().should('not.be.focused');
     cy.get('#docsearch-input')
       .should('be.visible')
       .type('find')
