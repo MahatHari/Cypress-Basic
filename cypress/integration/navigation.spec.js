@@ -34,6 +34,7 @@ describe('Test search functionality', () => {
       .find('#docsearch-item-0')
       .should('have.text', 'find')
       .click()
+      .should('not.exist')
       .url()
       .should('include', '/api/commands/find');
   });
