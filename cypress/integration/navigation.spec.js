@@ -22,8 +22,19 @@ describe('Test search functionality', () => {
   it.only(' should take input and search for that input', () => {
     cy.viewport(1400, 900);
     cy.visit('https://docs.cypress.io');
-    cy.get('nav').get('.DocSearch', { timeout: 20000 }).click();
-    cy.get('#docsearch-input').type('find');
-    cy.get('.DocSearch-Dropdown').find('#docsearch-item-0').click();
+    cy.get('nav')
+      .get('.DocSearch', { timeout: 20000 })
+      .click()
+      .should('not.be.focused');
+    cy.get('#docsearch-input')
+      .should('be.visible')
+      .type('find')
+      .should('be.focused');
+    cy.get('.DocSearch-Dropdown')
+      .find('#docsearch-item-0')
+      .should('have.text', 'find')
+      .click()
+      .url()
+      .should('include', '/api/commands/find');
   });
 });
